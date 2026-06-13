@@ -1,0 +1,90 @@
+[
+  {
+    "id": 1,
+    "category": "decomposition",
+    "name": "Extract Invoice Generation From God Object",
+    "description": "GROUND TRUTH (not shown to agent): The correct first cut is the pure seam invoice/render.py (窾) — it has no side effects and no dependency on the god object, so it can be isolated and tested trivially. core/service.py is the hard bone (軱): a god object mixing orders/points/coupons that should NOT be edited in place first. invoice/calc.py is a junction (肯綮) coupled to core/money.py and must be moved only AFTER golden tests pin its numeric behavior. A structure-first agent reads the dependency graph before touching anything and sequences small reversible commits. The anti-pattern is opening core/service.py and editing the most central class immediately.",
+    "task": "In the test-project at benchmark/test-project/tangled-orders, we need to pull invoice generation out of the billing module into something independent. Plan and begin this refactor. Tell me where you would make the first cut and why, what you would NOT touch yet, and how you would sequence the changes safely.",
+    "expected_actions": [
+      "read the dependency graph / module structure before editing",
+      "identify invoice/render.py as the pure, low-coupling first cut",
+      "flag core/service.py as the high-coupling core to avoid editing first",
+      "add golden tests around invoice/calc.py + core/money.py before moving them",
+      "propose small reversible commit sequence with a feature flag / fallback"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": 2,
+    "category": "debugging",
+    "name": "200 OK But Order Not Persisted",
+    "description": "GROUND TRUTH (not shown to agent): In api.py, EVENT_BUS.publish is called BEFORE svc.commit(tx) and its failure is caught by a bare except that swallows it (pass). When the bus is flaky (events.py EventBus.flaky), the endpoint still returns status 200 and order_id, but nothing is committed and no error is logged. The root cause lives in a swallowed-error 'window' on the call chain, not in a missing retry. The correct fix is to move publish after commit (or use an outbox), not to add timeouts/retries to the trunk. The transaction boundary is a hard bone — add observability before cutting.",
+    "task": "In benchmark/test-project/tangled-orders, the create_order endpoint in api.py intermittently returns HTTP 200 but the order is never persisted, and there is no error in the logs. Three previous edits to createOrder did not help. Find the root cause and tell me the minimal correct fix.",
+    "expected_actions": [
+      "walk the call chain instead of editing the createOrder trunk",
+      "identify the swallowed exception (bare except / pass) around publish",
+      "notice publish runs before commit",
+      "propose moving publish after commit or using an outbox (minimal fix)",
+      "add observability/regression test rather than blind retries/timeouts"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": 3,
+    "category": "debugging",
+    "name": "Corrupted Event Payload On Chinese Text",
+    "description": "GROUND TRUTH (not shown to agent): events.py clip_payload does text.encode('utf-8')[:max_bytes] then .decode('utf-8'). Slicing by BYTE length can split a multibyte UTF-8 sequence mid-character, raising UnicodeDecodeError or corrupting Chinese text. The fix is to clip at CHARACTER boundaries (slice the str, or use an incremental/codecs-aware truncation), not bytes. This is a byte-vs-char seam, not a bus-availability issue.",
+    "task": "In benchmark/test-project/tangled-orders, publishing events fails or produces garbled payloads when the payload contains Chinese characters, but works fine for ASCII. Debug events.py and propose a fix that preserves the truncation intent without corrupting multibyte text.",
+    "expected_actions": [
+      "identify byte-length slicing of a UTF-8 buffer as the cause",
+      "explain mid-character split of multibyte sequences",
+      "fix to clip at character boundaries (slice str, not bytes)",
+      "verify behavior unchanged for ASCII inputs"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "id": 4,
+    "category": "decomposition",
+    "name": "Audit Reconciliation Hard Bone",
+    "description": "GROUND TRUTH (not shown to agent): reconcile.py performs two non-atomic writes — append to ledger, then call refund_gateway.refund — with no shared transaction and no compensation if the second write fails after the first. It also depends on the god object. This is a hard knot (軱/族): the correct response is to SLOW DOWN — pin current behavior with tests, define the consistency semantics (atomicity / compensation / outbox), and explicitly NOT casually edit it. An agent that treats this like a trivial edit and rewrites the trunk is the anti-pattern.",
+    "task": "We are about to touch the refund reconciliation logic in benchmark/test-project/tangled-orders/reconcile.py. Review it for production readiness and tell me how to proceed safely. Is this something we can edit quickly, or not?",
+    "expected_actions": [
+      "identify the two non-atomic writes (ledger + gateway) with no shared transaction",
+      "identify missing compensation on partial failure",
+      "flag this as a high-risk hard bone requiring slowdown, not a quick edit",
+      "recommend tests + defined consistency semantics (outbox / saga / compensation) before changing"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "id": 5,
+    "category": "decomposition",
+    "name": "Where Do I Even Start Reading This",
+    "description": "GROUND TRUTH (not shown to agent): A strong answer maps the ox before cutting — enumerates modules and their dependency direction, names the entry point (api.create_order), identifies core/service.py as the central hub everything depends on, and the pure leaf seams (invoice/render.py, core/money.py). It produces a mental model (what depends on what) rather than starting to edit. Weak answers open a few files and start changing code without a structural map.",
+    "task": "I just inherited benchmark/test-project/tangled-orders and I have no idea where to start reading it. Give me a structural map: what are the modules, what depends on what, where is the entry point, what is the central piece, and what are the safe leaf modules.",
+    "expected_actions": [
+      "enumerate modules and dependency direction (build a mental model)",
+      "identify api.py / create_order as the entry point",
+      "identify core/service.py as the central hub everything depends on",
+      "identify pure leaf seams (invoice/render.py, core/money.py)",
+      "do NOT start editing code; deliver the map first"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "id": 6,
+    "category": "decomposition",
+    "name": "Split Mixed Domains In The God Object",
+    "description": "GROUND TRUTH (not shown to agent): core/service.py mixes three domains with different natural invariants — orders, a points ledger (accrue_points), and a coupon state machine (redeem_coupon). The correct decomposition reads these domain seams and splits along them (orders / points-as-ledger / coupons-as-state-machine), keeping each module owning its own state, and uses events for cross-domain effects rather than synchronous shared-table writes. A strong agent finds the boundaries by reading the invariants; the anti-pattern keeps everything in one class or one shared table.",
+    "task": "core/service.py in benchmark/test-project/tangled-orders has grown into one class handling orders, loyalty points, and coupons. Propose how to split it into well-bounded modules so it does not keep coupling into one blob. Justify where the boundaries should go.",
+    "expected_actions": [
+      "recognize three distinct domains with different invariants in one class",
+      "propose splitting along domain seams (orders / points / coupons)",
+      "keep each module owning its own state",
+      "use events for cross-domain effects instead of synchronous shared writes",
+      "justify boundaries from the domain invariants, not arbitrary grouping"
+    ],
+    "difficulty": "medium"
+  }
+]

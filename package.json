@@ -1,0 +1,27 @@
+{
+  "name": "@labs-skills/paoding-jieniu",
+  "version": "1.1.0",
+  "description": "庖丁解牛 PaoDing JieNiu — an open-source skill that translates Zhuangzi's ox-carving way into a method for AI to decompose complex systems: read the grain, enter the seams, slow at the knots, keep the blade sharp.",
+  "license": "MIT",
+  "author": "WUJI (wuji-labs)",
+  "homepage": "https://github.com/wuji-labs/paoding-jieniu",
+  "private": true,
+  "type": "module",
+  "files": [
+    "SKILL.md",
+    "README.md",
+    "README.zh-CN.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    ".claude-plugin/",
+    "commands/",
+    "examples/",
+    "reference/",
+    "platforms/",
+    "benchmark/"
+  ],
+  "scripts": {
+    "build": "echo no build",
+    "clean": "echo clean"
+  }
+}

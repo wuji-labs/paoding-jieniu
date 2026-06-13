@@ -1,0 +1,25 @@
+{
+  "name": "paoding-jieniu",
+  "version": "1.1.0",
+  "description": "The Ox-Carving Way. Teaches AI to decompose tangled codebases and ambiguous tasks by reading structure first, entering existing seams, slowing at hard knots, and keeping the blade sharp. Based on Zhuangzi's parable of Cook Ding. Triggers on refactor / legacy-codebase / where-do-I-start / architecture-boundary / deep-debug moments.",
+  "author": "WUJI (wuji-labs)",
+  "homepage": "https://github.com/wuji-labs/paoding-jieniu",
+  "repository": "https://github.com/wuji-labs/paoding-jieniu",
+  "license": "MIT",
+  "keywords": [
+    "refactoring",
+    "decomposition",
+    "legacy-code",
+    "architecture",
+    "debugging",
+    "zhuangzi",
+    "methodology",
+    "agent-skill"
+  ],
+  "skills": [
+    { "name": "paoding-jieniu", "path": "SKILL.md", "language": "zh-CN" }
+  ],
+  "commands": [
+    { "name": "paoding-jieniu", "path": "commands/paoding-jieniu.md" }
+  ]
+}

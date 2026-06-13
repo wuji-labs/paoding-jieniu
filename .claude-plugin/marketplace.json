@@ -1,0 +1,21 @@
+{
+  "name": "paoding-jieniu-skills",
+  "description": "PaoDing JieNiu — The Ox-Carving Way. Decompose complex systems along their natural grain, after Zhuangzi's Cook Ding.",
+  "owner": {
+    "name": "WUJI",
+    "email": "okeah631@gmail.com",
+    "url": "https://github.com/wuji-labs"
+  },
+  "plugins": [
+    {
+      "name": "paoding-jieniu",
+      "description": "PaoDing JieNiu — read the grain, enter the seams, slow at the knots, keep the blade sharp.",
+      "version": "1.1.0",
+      "source": "./",
+      "author": {
+        "name": "WUJI",
+        "url": "https://github.com/wuji-labs"
+      }
+    }
+  ]
+}
