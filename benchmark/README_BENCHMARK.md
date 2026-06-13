@@ -4,14 +4,20 @@ Reproducible evaluation harness for the 庖丁解牛 (Ox-Carving Way) skill. It 
 whether an AI agent, when handed a tangled codebase, **reads the structure and
 cuts along the grain** instead of **hacking the most-coupled core first**.
 
-> ## ⚠️ RESULTS NOT YET RUN — THIS FILE IS THE EVALUATION DESIGN
-> This repository ships the **scenario set, the test subject, the scoring rubric,
-> and the runner/analyzer**. It contains **NO benchmark numbers** — no win rates,
-> no p-values, no effect sizes, no before/after percentages. Any such figure
-> would be fabricated and is forbidden by the research-integrity rule. To obtain
-> real numbers, run `run_benchmark.py` against live models, then
-> `analyze_results.py`, and report the actual output. Until then, treat every
-> claim about effect as *untested hypothesis*.
+> ## ◐ PILOT RUN COMPLETE (scenarios #1–#2) · FULL SWEEP PENDING
+> A real pilot has been run for scenarios **#1 (decomposition)** and **#2
+> (debugging)** — 3 runs per condition on a frontier model (Claude Opus 4.x), 12
+> verbatim transcripts. **Honest finding: no measurable gap** — the frontier
+> baseline is already at ceiling on this 150-LOC subject, so the skill's measured
+> lift is ≈ 0 here. See [`results/pilot-2026-06-14.md`](./results/pilot-2026-06-14.md)
+> and [`results/raw-transcripts.md`](./results/raw-transcripts.md).
+>
+> Scenarios **#3–#6 are NOT yet run**, and the skill's expected value on **weaker
+> models / larger codebases / consistency** is **NOT yet quantified** (needs
+> `run_benchmark.py` against pinned weaker models — API keys absent in our env).
+> Every unmeasured claim remains an *untested hypothesis*. **No number here is
+> fabricated**; figures forbidden by the research-integrity rule until real runs
+> exist, and the pilot reports exactly what it measured and what it did not.
 
 ---
 
