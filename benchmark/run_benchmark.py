@@ -28,6 +28,12 @@ MODEL_REGISTRY = {
     "claude-sonnet-4": ("anthropic", "claude-sonnet-4-20250514"),
     "gpt-4o": ("openai", "gpt-4o"),
     "gemini-2.5-pro": ("google", "gemini-2.5-pro"),
+    # Local, zero-cost, no API key — run the whole benchmark for free with Ollama.
+    # These are weak/mid models on purpose: a frontier model is near-ceiling on a
+    # 150-LOC subject, so the skill's lift is best measured on a weaker base.
+    "qwen2.5vl-7b": ("ollama", "qwen2.5vl:7b"),
+    "qwen3-32b": ("ollama", "qwen3:32b"),
+    "ollama": ("ollama", os.environ.get("OLLAMA_MODEL", "qwen2.5vl:7b")),
 }
 
 CONDITIONS = ("baseline", "paoding")
@@ -102,11 +108,57 @@ def call_google(model_id, system, user):
     return resp.text
 
 
+def call_ollama(model_id, system, user):
+    # Local Ollama HTTP API. Stdlib only — no SDK, no API key, no network cost.
+    # Host overridable via OLLAMA_HOST (default http://localhost:11434).
+    import urllib.request
+
+    host = os.environ.get("OLLAMA_HOST", "http://localhost:11434").strip().rstrip("/")
+    # Normalize: 0.0.0.0 is a bind-all address, not connectable; add scheme if bare.
+    host = host.replace("0.0.0.0", "127.0.0.1")
+    if "://" not in host:
+        host = "http://" + host
+    payload = json.dumps({
+        "model": model_id,
+        "stream": False,
+        "messages": [
+            {"role": "system", "content": system},
+            {"role": "user", "content": user},
+        ],
+        "options": {"temperature": 0.3},
+    }).encode("utf-8")
+    req = urllib.request.Request(
+        f"{host}/api/chat", data=payload,
+        headers={"Content-Type": "application/json"},
+    )
+    with urllib.request.urlopen(req, timeout=600) as resp:
+        body = json.loads(resp.read().decode("utf-8"))
+    return body.get("message", {}).get("content", "")
+
+
 PROVIDER_DISPATCH = {
     "anthropic": call_anthropic,
     "openai": call_openai,
     "google": call_google,
+    "ollama": call_ollama,
 }
+
+# Providers that cannot browse the filesystem themselves (plain chat completions).
+# For these we inline the codebase into the prompt instead of pointing at a path.
+NON_AGENTIC_PROVIDERS = {"ollama", "openai", "google"}
+
+
+def inline_codebase(codebase_path: str) -> str:
+    root = Path(codebase_path)
+    if not root.exists():
+        return ""
+    chunks = []
+    for f in sorted(root.rglob("*.py")):
+        try:
+            chunks.append(f"--- {f.relative_to(root)} ---\n{f.read_text(encoding='utf-8')}")
+        except Exception:
+            continue
+    return "\n\n".join(chunks)
 
 
 def run_once(provider, model_id, system, user):
@@ -178,11 +230,22 @@ def main():
     out_dir = Path(args.output_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
 
+    code_blob = ""
+    if provider in NON_AGENTIC_PROVIDERS:
+        code_blob = inline_codebase(args.codebase_path)
+        if not code_blob:
+            sys.exit(f"No .py files to inline under {args.codebase_path}")
+
     for condition in conditions:
         system = BASELINE_SYSTEM if condition == "baseline" else paoding_system
         records = []
         for scenario in scenarios:
             user = build_user_prompt(scenario, args.codebase_path)
+            if code_blob:
+                user += (
+                    "\n\nYou cannot browse the filesystem; the full codebase under "
+                    f"test is inlined below.\n\n{code_blob}"
+                )
             for run_number in range(1, args.runs + 1):
                 rec = empty_record(scenario, condition, args.model, run_number)
                 try:

@@ -1,5 +1,7 @@
 # 庖丁解牛 PaoDing JieNiu — 解牛之道
 
+**[🇨🇳 简体中文](README.zh-CN.md)** · **[🇺🇸 English](README.md)** · **[🇯🇵 日本語](README.ja.md)** · **[🇰🇷 한국어](README.ko.md)** · **[🇪🇸 Español](README.es.md)** · **[🇧🇷 Português](README.pt.md)** · **[🇫🇷 Français](README.fr.md)**
+
 > English: [README.md](README.md) | 简体中文
 
 这是华夏道脉献给世界开源社区的十件礼物之一（叩兩端 · 无极樞纽）。

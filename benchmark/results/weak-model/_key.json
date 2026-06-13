@@ -1,0 +1,182 @@
+{
+ "T01": {
+  "cond": "baseline",
+  "sid": 3,
+  "run": 1
+ },
+ "T02": {
+  "cond": "baseline",
+  "sid": 6,
+  "run": 2
+ },
+ "T03": {
+  "cond": "paoding",
+  "sid": 1,
+  "run": 3
+ },
+ "T04": {
+  "cond": "paoding",
+  "sid": 3,
+  "run": 2
+ },
+ "T05": {
+  "cond": "paoding",
+  "sid": 6,
+  "run": 3
+ },
+ "T06": {
+  "cond": "baseline",
+  "sid": 2,
+  "run": 3
+ },
+ "T07": {
+  "cond": "paoding",
+  "sid": 5,
+  "run": 1
+ },
+ "T08": {
+  "cond": "baseline",
+  "sid": 1,
+  "run": 1
+ },
+ "T09": {
+  "cond": "baseline",
+  "sid": 4,
+  "run": 2
+ },
+ "T10": {
+  "cond": "baseline",
+  "sid": 6,
+  "run": 1
+ },
+ "T11": {
+  "cond": "paoding",
+  "sid": 1,
+  "run": 2
+ },
+ "T12": {
+  "cond": "paoding",
+  "sid": 4,
+  "run": 3
+ },
+ "T13": {
+  "cond": "paoding",
+  "sid": 3,
+  "run": 1
+ },
+ "T14": {
+  "cond": "paoding",
+  "sid": 6,
+  "run": 2
+ },
+ "T15": {
+  "cond": "baseline",
+  "sid": 2,
+  "run": 2
+ },
+ "T16": {
+  "cond": "baseline",
+  "sid": 5,
+  "run": 3
+ },
+ "T17": {
+  "cond": "baseline",
+  "sid": 4,
+  "run": 1
+ },
+ "T18": {
+  "cond": "paoding",
+  "sid": 2,
+  "run": 3
+ },
+ "T19": {
+  "cond": "paoding",
+  "sid": 1,
+  "run": 1
+ },
+ "T20": {
+  "cond": "paoding",
+  "sid": 4,
+  "run": 2
+ },
+ "T21": {
+  "cond": "baseline",
+  "sid": 3,
+  "run": 3
+ },
+ "T22": {
+  "cond": "paoding",
+  "sid": 6,
+  "run": 1
+ },
+ "T23": {
+  "cond": "baseline",
+  "sid": 2,
+  "run": 1
+ },
+ "T24": {
+  "cond": "baseline",
+  "sid": 5,
+  "run": 2
+ },
+ "T25": {
+  "cond": "paoding",
+  "sid": 2,
+  "run": 2
+ },
+ "T26": {
+  "cond": "paoding",
+  "sid": 5,
+  "run": 3
+ },
+ "T27": {
+  "cond": "baseline",
+  "sid": 1,
+  "run": 3
+ },
+ "T28": {
+  "cond": "paoding",
+  "sid": 4,
+  "run": 1
+ },
+ "T29": {
+  "cond": "baseline",
+  "sid": 3,
+  "run": 2
+ },
+ "T30": {
+  "cond": "baseline",
+  "sid": 6,
+  "run": 3
+ },
+ "T31": {
+  "cond": "baseline",
+  "sid": 5,
+  "run": 1
+ },
+ "T32": {
+  "cond": "paoding",
+  "sid": 3,
+  "run": 3
+ },
+ "T33": {
+  "cond": "paoding",
+  "sid": 2,
+  "run": 1
+ },
+ "T34": {
+  "cond": "paoding",
+  "sid": 5,
+  "run": 2
+ },
+ "T35": {
+  "cond": "baseline",
+  "sid": 1,
+  "run": 2
+ },
+ "T36": {
+  "cond": "baseline",
+  "sid": 4,
+  "run": 3
+ }
+}
