@@ -1,6 +1,20 @@
 ---
 name: paoding-jieniu
-description: 把《庄子·养生主》庖丁解牛「依乎天理·批大郤·导大窾·游刃有余」转为 AI 拆解复杂系统的方法论——动刀前先读结构、循自然纹理从缝隙入手、遇硬骨头降速、小步可逆保持刀刃常新。当任务是重构遗留模块、拆解庞大/陌生代码库、把含混大任务拆成可执行小步、划分系统/模块边界、沿调用链定位深层 bug 的根因(「窾」)、或评估技术债该从何下刀时,应自动加载。触发关键词:重构、refactor、遗留/legacy、祖传代码、这模块太大、不知从何读起/where do I start、拆解、分解/decompose、模块边界、架构划分、解耦、调用链、深层 bug、根因、技术债、游刃有余。反触发:写全新单文件/单函数、纯样式微调、回答与代码结构无关的事实问题——这些不必动用本 skill。
+description: >-
+  Turns Cook Ding carving the ox in 《庄子·养生主》Zhuangzi (依乎天理 follow the
+  natural grain · 批大郤·导大窾 enter through the gaps and cavities · 游刃有余 move the
+  blade with room to spare) into a methodology for AI to decompose complex
+  systems — read the structure before cutting, enter through the seams along the
+  natural grain, slow down at hard knots, take small reversible steps that keep
+  the blade ever-sharp. Activates when: refactoring a legacy module, decomposing
+  a large/unfamiliar codebase, splitting a vague big task into executable steps,
+  drawing system/module boundaries, tracing a call chain to the root cause
+  (「窾」the cavity) of a deep bug, or judging where to cut into tech debt.
+  Keywords: refactor / 重构, legacy / 遗留 / 祖传代码, this module is too big, where do
+  I start / 不知从何读起, decompose / 拆解, module boundaries, decoupling, call chain,
+  deep bug, root cause, tech debt, 游刃有余. Not for: a brand-new single
+  file/function, pure style tweaks, or factual questions unrelated to code
+  structure.
 version: 1.1.0
 date: 2026-06-02
 authority: WUJI Labs
