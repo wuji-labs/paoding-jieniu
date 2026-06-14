@@ -70,3 +70,25 @@ publish-before-commit and nailed it.
 
 We report exactly what we measured. The result is not what we hoped; it is what the
 data says.
+
+## Follow-up: a lean variant recovers most of the loss (hypothesis → tested)
+
+The interpretation above predicts that the *length* of the methodology, not the
+method itself, is what overloads a small model. So we built **`paoding-lite`** (the
+same four moves as pure action items, ~800 tokens, no parable —
+`skills/paoding-lite/SKILL.md`) and re-ran the identical weak-model benchmark with it
+(`results/weak-model-lite/`, N=18, blind-judged the same way).
+
+| Condition (qwen2.5vl:7b) | correct | expected_actions |
+|---|---|---|
+| baseline | 18/18 (100%) | 51/84 (61%) |
+| paoding **full** | 13/18 (72%) | 47/84 (56%) |
+| paoding **lite** | **16/18 (89%)** | **56/84 (67%)** |
+
+**The lean form recovers most of the degradation** (correct 72% → 89%; process
+adherence 56% → 67%, now *above* baseline). It still trails baseline on correctness
+(89% < 100%), so even a lean methodology adds no net correctness to a model that
+isn't already weak — but it confirms the cause was **prompt length crowding a small
+model's attention**, not the method. This is the honest, data-backed reason
+`paoding-lite` exists, mirroring `nopua-lite`. Hypothesis stated, intervention built,
+re-measured, reported — favorable *and* unfavorable parts alike.

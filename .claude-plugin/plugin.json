@@ -17,9 +17,21 @@
     "agent-skill"
   ],
   "skills": [
-    { "name": "paoding-jieniu", "path": "SKILL.md", "language": "zh-CN" }
+    {
+      "name": "paoding-jieniu",
+      "path": "SKILL.md",
+      "language": "zh-CN"
+    },
+    {
+      "name": "paoding-lite",
+      "path": "skills/paoding-lite/SKILL.md",
+      "language": "en"
+    }
   ],
   "commands": [
-    { "name": "paoding-jieniu", "path": "commands/paoding-jieniu.md" }
+    {
+      "name": "paoding-jieniu",
+      "path": "commands/paoding-jieniu.md"
+    }
   ]
 }

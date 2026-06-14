@@ -1,0 +1,9 @@
+[{"id":"T01","correct":1,"actions_hit":3,"actions_total":5},{"id":"T02","correct":1,"actions_hit":3,"actions_total":5},
+{"id":"T03","correct":1,"actions_hit":4,"actions_total":5},{"id":"T04","correct":0,"actions_hit":1,"actions_total":5},
+{"id":"T05","correct":0,"actions_hit":3,"actions_total":5},{"id":"T06","correct":1,"actions_hit":3,"actions_total":5},
+{"id":"T07","correct":1,"actions_hit":4,"actions_total":4},{"id":"T08","correct":1,"actions_hit":3,"actions_total":4},
+{"id":"T09","correct":1,"actions_hit":2,"actions_total":4},{"id":"T10","correct":1,"actions_hit":2,"actions_total":4},
+{"id":"T11","correct":1,"actions_hit":3,"actions_total":4},{"id":"T12","correct":1,"actions_hit":4,"actions_total":4},
+{"id":"T13","correct":1,"actions_hit":4,"actions_total":5},{"id":"T14","correct":1,"actions_hit":4,"actions_total":5},
+{"id":"T15","correct":1,"actions_hit":4,"actions_total":5},{"id":"T16","correct":1,"actions_hit":4,"actions_total":5},
+{"id":"T17","correct":1,"actions_hit":2,"actions_total":5},{"id":"T18","correct":1,"actions_hit":3,"actions_total":5}]
