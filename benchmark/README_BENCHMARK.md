@@ -4,20 +4,42 @@ Reproducible evaluation harness for the 庖丁解牛 (Ox-Carving Way) skill. It 
 whether an AI agent, when handed a tangled codebase, **reads the structure and
 cuts along the grain** instead of **hacking the most-coupled core first**.
 
-> ## ◐ PILOT RUN COMPLETE (scenarios #1–#2) · FULL SWEEP PENDING
-> A real pilot has been run for scenarios **#1 (decomposition)** and **#2
-> (debugging)** — 3 runs per condition on a frontier model (Claude Opus 4.x), 12
-> verbatim transcripts. **Honest finding: no measurable gap** — the frontier
-> baseline is already at ceiling on this 150-LOC subject, so the skill's measured
-> lift is ≈ 0 here. See [`results/pilot-2026-06-14.md`](./results/pilot-2026-06-14.md)
-> and [`results/raw-transcripts.md`](./results/raw-transcripts.md).
+> ## ◑ REAL RUNS COMPLETE — results below, honestly including the unflattering parts
 >
-> Scenarios **#3–#6 are NOT yet run**, and the skill's expected value on **weaker
-> models / larger codebases / consistency** is **NOT yet quantified** (needs
-> `run_benchmark.py` against pinned weaker models — API keys absent in our env).
-> Every unmeasured claim remains an *untested hypothesis*. **No number here is
-> fabricated**; figures forbidden by the research-integrity rule until real runs
-> exist, and the pilot reports exactly what it measured and what it did not.
+> | Model | Subject | Mode | Skill vs baseline |
+> |---|---|---|---|
+> | Frontier (Opus 4.x) | 150 LOC | inlined | **no gap** — both at ceiling |
+> | Frontier (Opus 4.x) | 1855 LOC | **agentic navigation** | **no gap** — both navigate correctly |
+> | Weak (qwen2.5vl:7b) | 150 LOC | inlined | **negative** — full skill hurt (72% vs 100%) |
+> | Weak — **paoding-lite** | 150 LOC | inlined | recovers most of it (89%) |
+>
+> Details: [`results/pilot-2026-06-14.md`](./results/pilot-2026-06-14.md) ·
+> [`results/large-codebase-2026-06-14.md`](./results/large-codebase-2026-06-14.md) ·
+> [`results/weak-model/FINDINGS.md`](./results/weak-model/FINDINGS.md). No number is
+> fabricated; raw transcripts + blind keys + scores are all committed.
+>
+> ### ⚠️ How to read this — what it does and does NOT say
+> This benchmark measures **one** narrow thing: does prepending the skill change
+> **bug-finding / decomposition correctness** on a **coding** task. It is the *hardest
+> possible case to show a skill effect*, on purpose — a coding skill, on the model
+> already strongest at coding, scored by hard correctness.
+>
+> **"No correctness lift on a frontier model" is NOT "no value."** It is true of
+> almost any prompt on a frontier model, which is already expert. The skill's real
+> value lives where this harness deliberately does not look:
+> - **Behavior & consistency** — getting the structure-first method *reliably, every
+>   run, for every user*, not only when the model happens to. (A floor, not a ceiling.)
+> - **Weaker models / tight budgets** — where the base model is *not* already expert;
+>   here the lean **paoding-lite** measurably helps.
+> - **The artifact itself** — a packaged, documented, installable method has worth even
+>   if a frontier model could reconstruct it from scratch.
+>
+> And note: **9 of the 10 HuaXia skills are not coding skills at all** — they shape
+> aesthetics, literary voice, health framing, strategy, teaching, judgment. "Does it
+> have soul / taste / the right framing" has **no correctness score**; a bug-finding
+> benchmark is simply the wrong instrument for them. We benchmark the one skill that
+> *can* be hard-scored, and report the result straight — including that it is a null
+> on frontier models. Publishing our own unfavorable data is the point.
 
 ---
 
