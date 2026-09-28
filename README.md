@@ -152,3 +152,7 @@ MIT — Use freely. Carve along the grain.
 
 *庖丁解牛 PaoDing JieNiu — by [WUJI](https://github.com/wuji-labs)*
 *依乎天理，游刃有余。Follow the grain; the blade roams free.*
+
+## 联系 · Contact
+扫码添加无极微信，交流合作 · Scan to add WUJI on WeChat
+<img src="assets/wechat-qr.png" width="200" alt="WUJI WeChat QR">
